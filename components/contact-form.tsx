@@ -11,7 +11,6 @@ export default function ContactForm() {
     company: "",
     message: "",
   })
-  const [submitted, setSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -35,11 +34,17 @@ export default function ContactForm() {
         `Message:\n${formData.message}`
       )
       
-      // Open email client with pre-filled information
-      window.location.href = `mailto:support@intelliedgesilicon.systems?subject=${subject}&body=${body}`
+      // Open email client without redirecting the page
+      const mailtoLink = `mailto:support@intelliedgesilicon.systems?subject=${subject}&body=${body}`
+      const link = document.createElement('a')
+      link.href = mailtoLink
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
       
-      // Show success message
-      setSubmitted(true)
+      // Wait longer for user to see the status and handle email, then reset form
       setTimeout(() => {
         setFormData({
           name: "",
@@ -47,9 +52,9 @@ export default function ContactForm() {
           company: "",
           message: "",
         })
-        setSubmitted(false)
-      }, 3000)
-    } finally {
+        setIsLoading(false)
+      }, 5000)
+    } catch (error) {
       setIsLoading(false)
     }
   }
@@ -63,16 +68,21 @@ export default function ContactForm() {
           <p className="text-white/60">Have questions about custom chip design? Reach out to our team.</p>
         </div>
 
-        {submitted ? (
+        {isLoading ? (
           <div className="text-center py-12 space-y-4">
             <div className="w-12 h-12 rounded-sm bg-white/10 mx-auto flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              <svg className="w-6 h-6 text-white animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
               </svg>
             </div>
             <div>
-              <h3 className="text-xl font-heading font-bold mb-2">Message Received</h3>
-              <p className="text-white/60 text-sm">Thank you for reaching out. We will get back to you shortly.</p>
+              <h3 className="text-xl font-heading font-bold mb-2">Opening Your Email Client</h3>
+              <p className="text-white/60 text-sm">Preparing your message and opening your default email application...</p>
             </div>
           </div>
         ) : (
