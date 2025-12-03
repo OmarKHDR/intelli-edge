@@ -16,6 +16,7 @@ cp -R ../intelli-edge/out/* .
 
 # Keep CNAME if needed
 cp ../intelli-edge/CNAME .  # if you have it
+cp ../intelli-edge/.nojekyll .
 
 # Commit and push
 git add .
