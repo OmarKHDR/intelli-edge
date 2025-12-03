@@ -5,7 +5,14 @@ set -e
 npm run build
 
 # 2. Remove everything in current directory except `out` and `CNAME`
-find . -mindepth 1 -maxdepth 1 ! -name 'out' ! -name 'CNAME' ! -name 'deploy.sh' -exec rm -rf {} +
+find . -mindepth 1 -maxdepth 1 \
+  ! -name 'out' \
+  ! -name 'CNAME' \
+  ! -name 'deploy.sh' \
+  ! -name '.git' \
+  ! -name '.gitignore' \
+  ! -name '.github' \
+  -exec rm -rf {} +
 
 # 3. Copy all files from out/ to current directory
 cp -r out/* .
