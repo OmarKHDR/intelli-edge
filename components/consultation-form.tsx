@@ -28,7 +28,21 @@ export default function ConsultationForm() {
     setIsLoading(true)
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      // Construct email content
+      const subject = encodeURIComponent(`Consultation Request: ${formData.name}`)
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Preferred Date: ${formData.date}\n` +
+        `Preferred Time: ${formData.time}\n` +
+        `Timezone: ${formData.timezone}\n\n` +
+        `Additional Notes:\n${formData.note || 'N/A'}`
+      )
+      
+      // Open email client with pre-filled information
+      window.location.href = `mailto:support@intelliedgesilicon.systems?subject=${subject}&body=${body}`
+      
+      // Show success message
       setSubmitted(true)
       setTimeout(() => {
         setFormData({

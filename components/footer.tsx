@@ -17,8 +17,8 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-heading font-bold text-sm uppercase tracking-wide text-white/80 mb-4">Contact</h4>
-            <a href="mailto:hello@intelliedge.io" className="text-white/60 hover:text-white transition-colors text-sm">
-              hello@intelliedge.io
+            <a href="support@intelliedgesilicons.systems" className="text-white/60 hover:text-white transition-colors text-sm">
+              support@intelliedgesilicons.systems
             </a>
           </div>
 

@@ -14,13 +14,14 @@ export default function AboutSection() {
         </div>
 
         {/* Founders */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {/* Mohamed Salah */}
           <div className="space-y-3">
             <h3 className="font-heading font-bold text-lg">Mohamed Salah</h3>
             <p className="text-white/60 leading-relaxed text-sm">
-              Hardware architect with 12+ years in silicon design and AI accelerator systems. Deep expertise in chip
-              architecture and performance optimization.
+              Senior engineering researcher specializing in advanced silicon architecture and AI acceleration frameworks. 
+              Focused on pushing the boundaries of domain-specific chip design through innovative hardware-software integration 
+              and rigorous performance optimization methodologies.
             </p>
           </div>
 
@@ -28,8 +29,19 @@ export default function AboutSection() {
           <div className="space-y-3">
             <h3 className="font-heading font-bold text-lg">Mahmoud Ezzat</h3>
             <p className="text-white/60 leading-relaxed text-sm">
-              Algorithm researcher specializing in hardware-algorithm co-optimization. Proven track record in
-              domain-specific computing systems and low-level optimization.
+              Senior engineering researcher with deep expertise in computational algorithms and hardware co-design. 
+              Specializes in developing cutting-edge optimization techniques for custom silicon solutions, bridging 
+              theoretical computer architecture with practical, high-performance implementations.
+            </p>
+          </div>
+
+          {/* Omar Khaled */}
+          <div className="space-y-3">
+            <h3 className="font-heading font-bold text-lg">Omar Khaled</h3>
+            <p className="text-white/60 leading-relaxed text-sm">
+              Software engineer with expertise in backend systems and low-level software development. 
+              Passionate about open-source technologies and community-driven innovation, specializing in building 
+              robust infrastructure and optimizing system-level performance for next-generation computing platforms.
             </p>
           </div>
         </div>

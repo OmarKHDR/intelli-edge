@@ -26,7 +26,19 @@ export default function ContactForm() {
     setIsLoading(true)
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      // Construct email content
+      const subject = encodeURIComponent(`Contact Form: Message from ${formData.name}`)
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Company: ${formData.company || 'N/A'}\n\n` +
+        `Message:\n${formData.message}`
+      )
+      
+      // Open email client with pre-filled information
+      window.location.href = `mailto:support@intelliedgesilicon.systems?subject=${subject}&body=${body}`
+      
+      // Show success message
       setSubmitted(true)
       setTimeout(() => {
         setFormData({
