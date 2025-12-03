@@ -4,20 +4,25 @@ set -e
 # 1. Build the Next.js static site
 npm run build
 
-# 2. Remove everything in current directory except `out` and `CNAME`
-find . -mindepth 1 -maxdepth 1 \
-  ! -name 'out' \
-  ! -name 'CNAME' \
-  ! -name 'deploy.sh' \
-  ! -name '.git' \
-  ! -name '.gitignore' \
-  ! -name '.github' \
-  -exec rm -rf {} +
+# Add a temporary worktree for gh-pages
+git worktree add ../deploy-tmp gh-pages
 
-# 3. Copy all files from out/ to current directory
-cp -r out/* .
+# Clear old build
+cd ../deploy-tmp
+find . -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
 
-# 4. Optional: remove empty out/ folder
-rm -rf out
+# Copy build output
+cp -R ../intelli-edge/out/* .
 
-echo "Deployment files are ready in the root directory."
+# Keep CNAME if needed
+cp ../intelli-edge/CNAME .  # if you have it
+
+# Commit and push
+git add .
+git commit -m "Deploy latest build"
+git push origin -f gh-pages
+
+# Remove worktree
+cd ../intelli-edge
+git worktree remove ../deploy-tmp
+
